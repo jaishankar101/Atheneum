@@ -4,41 +4,49 @@ error_reporting(0);
 include('include/config.php');
 include('include/checklogin.php');
 // check_login();
+
 if (isset($_POST['submit'])) {
+    $Bcode = $_POST['Bcode'];
+    $Bname = $_POST['Bname'];
+    $img = $_FILES['img'];
+    $author = $_POST['author'];
+    $ed = $_POST['ed'];
+    $details = $_POST['details'];
+    $dept = $_POST['Dept'];
+    $e_link = $_POST['e_link'];
+    $supplier_id = $_POST['supplier_id'];
+    $quantity = $_POST['quantity'];
+
+    //IMAGE :START
+    $imgname = $img['name'];
     $img = $_FILES['img'];
     $basicext = array("png", "jpg", "jpeg");
     $temp = $img['tmp_name'];
     $namesplit = explode(".", $imgname);
     $imgext = strtolower(end($namesplit));
     if (in_array($imgext, $basicext)) {
-        $directory = "../img/" . $dept . "/" . $Bcode . "." . $imgext;
+        $directory = "../img/books/" . $dept . "/" . $Bcode . "." . $imgext;
         move_uploaded_file($temp, $directory);
     } else {
-?><script>
-            alert("IMAGE SHOUDE BE OF JPG,JPEG OR PNG FORMAT!! ");
-        </script>
-<?php
+        // $extra = "add_book.php";
+        $_SESSION['errmsg'] = "Invalid Extention";
+        // $uri  = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+        // header("location:http://$host$uri/$extra");
+        // exit();
+    }
+    //IMAGE :END
+
+    $sql = $con->query("INSERT INTO `books` (`Bcode`,`Bimg`, `Bname`, `author`, `ed`, `details`,`dept`, `e_link`,`supplier_id`,`quantity`) VALUES
+    ('$Bcode','$directory', '$Bname', '$author', '$ed', '$details','$dept','$e_link','$supplier_id','$quantity');");
+    if ($sql) {
+        echo "<script>alert('Book info added Successfully');</script>";
+        $host = $_SERVER['HTTP_HOST'];
+        $extra = "manage_books.php";
+        $uri  = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+        header("location:http://$host$uri/$extra");
+        exit();
     }
 }
-
-// if (isset($_POST['submit'])) {
-//     $Bcode = $_POST['Bcode'];
-//     $Bname = $_POST['Bname'];
-//     $img = $_FILES['img'];
-//     $author = $_POST['author'];
-//     $ed = $_POST['ed'];
-//     $details = $_POST['details'];
-//     $dept = $_POST['Dept'];
-//     $e_link = $_POST['e_link'];
-//     $supplier_id = $_POST['supplier_id'];
-//     $imgname=$img['name'];
-//     $sql = $con->query("INSERT INTO `books` (`Bcode`,`Bimg`, `Bname`, `author`, `ed`, `details`,`dept`, `E-Link`,`supplier-id`) VALUES
-//     ('$Bcode','$Bimg', '$Bname', '$author', '$ed', '$details','$dept','$e_link','$supplier_id', '$status');");
-//     if ($sql) {
-//         echo "<script>alert('Book info added Successfully');</script>";
-//         echo "<script type='text/javascript'> document.location = 'location:Manage_Books.php'; </script>";
-//     }
-// }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -103,31 +111,38 @@ if (isset($_POST['submit'])) {
 
                                                 <form role="form" name="addbook" method="post" enctype="multipart/form-data">
 
-
+                                                    <div class="form-group">
+                                                        <label for="BookCode">
+                                                            Book Code
+                                                        </label>
+                                                        <input type="text" name="Bcode" class="form-control" placeholder="Enter Book Code" autocomplete="off" required="required">
+                                                    </div>
                                                     <div class="form-group">
                                                         <label for="BookName">
                                                             Book Name
                                                         </label>
-                                                        <input type="text" name="Bname" class="form-control" placeholder="Enter Book Name" autocomplete="off">
+                                                        <input type="text" name="Bname" class="form-control" placeholder="Enter Book Name" autocomplete="off" required="required">
                                                     </div>
                                                     <div class="form-group">
+                                                        <span style="color:red;"><?php echo $_SESSION['errmsg'];
+                                                                                    echo $_SESSION['errmsg'] = ""; ?></span>
                                                         <label for="BookImg">
                                                             Upload Book Image(JPG,JPEG or PNG)
                                                         </label>
-                                                        <input type="file" name="img" class="form-control" placeholder="Upload Book Image">
+                                                        <input type="file" name="img" class="form-control" placeholder="Upload Book Image" required="required">
                                                     </div>
 
                                                     <div class="form-group">
                                                         <label for="Author">
                                                             Author Name
                                                         </label>
-                                                        <input type="text" name="author" class="form-control" placeholder="Enter Author Name" autocomplete="off">
+                                                        <input type="text" name="author" class="form-control" placeholder="Enter Author Name" autocomplete="off" required="required">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="Edition">
                                                             Book Edition
                                                         </label>
-                                                        <input type="text" name="ed" class="form-control" placeholder="Enter Edition">
+                                                        <input type="text" name="ed" class="form-control" placeholder="Enter Edition" required="required">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="Details">
@@ -164,7 +179,7 @@ if (isset($_POST['submit'])) {
                                                         <label for="Supplier">
                                                             Supplier Name
                                                         </label>
-                                                        <select name="supplier_id" class="form-control">
+                                                        <select name="supplier_id" class="form-control" required="required">
                                                             <option value="">Select Supplier</option>
                                                             <?php
                                                             $ret = mysqli_query($con, "SELECT * from `supplier`;");
@@ -177,12 +192,20 @@ if (isset($_POST['submit'])) {
 
                                                         </select>
                                                     </div>
+                                                    <div class="form-group">
+                                                        <label for="Quantity">
+                                                            Quantity
+                                                        </label>
+                                                        <input type="number" name="quantity" class="form-control" placeholder="Enter Quantity" required="required">
+                                                    </div>
 
+                                                    <div class="form-actions">
 
+                                                        <button type="submit" name="submit" class="btn btn-o btn-primary">
+                                                            Submit
+                                                        </button>
+                                                    </div>
 
-                                                    <button type="submit" name="submit" class="btn btn-o btn-primary">
-                                                        Submit
-                                                    </button>
                                                 </form>
                                             </div>
                                         </div>
