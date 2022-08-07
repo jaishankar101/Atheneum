@@ -10,7 +10,7 @@ check_login();
 <html lang="en">
 
 <head>
-    <title>Student | Dashboard</title>
+    <title>Admin | Dashboard</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -42,11 +42,11 @@ check_login();
                     <section id="page-title">
                         <div class="row">
                             <div class="col-sm-8">
-                                <h1 class="mainTitle">User | Dashboard</h1>
+                                <h1 class="mainTitle">Admin | Dashboard</h1>
                             </div>
                             <ol class="breadcrumb">
-                                <li>
-                                    <span>User</span>
+                                <li><a href="dashboard.php">
+                                        <span>Admin</span></a>
                                 </li>
                                 <li class="active">
                                     <span>Dashboard</span>
@@ -62,11 +62,11 @@ check_login();
                                 <div class="panel panel-white no-radius text-center">
                                     <div class="panel-body">
                                         <span class="fa-stack fa-2x"> <i class="fa fa-square fa-stack-2x text-primary"></i> <i class="fa fa-smile-o fa-stack-1x fa-inverse"></i> </span>
-                                        <h2 class="StepTitle">My Profile</h2>
+                                        <h2 class="StepTitle">Students</h2>
 
                                         <p class="links cl-effect-1">
-                                            <a href="edit-profile.php">
-                                                Update Profile
+                                            <a href="user_list.php">
+                                                List users
                                             </a>
                                         </p>
                                     </div>
@@ -76,11 +76,11 @@ check_login();
                                 <div class="panel panel-white no-radius text-center">
                                     <div class="panel-body">
                                         <span class="fa-stack fa-2x"> <i class="fa fa-square fa-stack-2x text-primary"></i> <i class="fa fa-list fa-stack-1x fa-inverse"></i> </span>
-                                        <h2 class="StepTitle">Borrow Histroy</h2>
+                                        <h2 class="StepTitle">Books</h2>
 
                                         <p class="cl-effect-1">
-                                            <a href="borrow_history.php">
-                                                View Borrow History
+                                            <a href="books.php">
+                                                View Books
                                             </a>
                                         </p>
                                     </div>
@@ -90,10 +90,10 @@ check_login();
                                 <div class="panel panel-white no-radius text-center">
                                     <div class="panel-body">
                                         <span class="fa-stack fa-2x"> <i class="fa fa-square fa-stack-2x text-primary"></i> <i class="fa fa-book fa-stack-1x fa-inverse"></i> </span>
-                                        <h2 class="StepTitle">Saved Books</h2>
+                                        <h2 class="StepTitle">FeedBack</h2>
 
                                         <p class="links cl-effect-1">
-                                            <a href="saved_books.php">
+                                            <a href="feedback.php">
                                                 View
                                             </a>
                                         </p>

@@ -11,7 +11,7 @@ if (isset($_POST['submit'])) {
     if ($num > 0) {
         $extra = "dashboard.php";
         $_SESSION['login'] = $_POST['lib_id'];
-        $_SESSION['name'] = $num['name'];
+        $_SESSION['name'] = $num['std_name'];
 
         $status = 1;
         $log = $con->query("INSERT INTO `userlog`(`lib_id`, `name`, `userip`, `status`) values('" . $_SESSION['login'] . "','" . $_SESSION['name'] . "','$uip','$status');");

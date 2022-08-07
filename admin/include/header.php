@@ -131,7 +131,7 @@
 
 				<li class="dropdown current-user">
 					<a onclick="myFunction()" class="dropfun" data-toggle="dropdown">
-						<img src="assets/images/avatar-1.jpg" alt="Peter"> <span class="username">Admin
+						<img src="assets/images/avatar-1.jpg" alt="Peter"> <span class="username"><?php echo $_SESSION['name'] ?>
 							<i class="ti-angle-down"></i></i></span>
 					</a>
 					<ul class="dropdown-menu dropdown-dark" id="myDropdown">

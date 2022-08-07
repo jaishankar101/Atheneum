@@ -7,7 +7,7 @@ if (isset($_POST['submit'])) {
     $number = $_POST['number'];
     $email = $_POST['email'];
     $password = md5($_POST['password']);
-    $query = "INSERT INTO `student_info`(`name`, `lib_id`, `usn`, `number`, `email`, `password`) VALUES ('$name','$lib_id','$usn','$number','$email','$password')";
+    $query = "INSERT INTO `student_info`(`std_name`, `lib_id`, `usn`, `number`, `email`, `password`) VALUES ('$name','$lib_id','$usn','$number','$email','$password')";
 
     if ($con->query($query)) {
         echo "<script>alert('Successfully Registered. You can login now');</script>";

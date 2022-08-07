@@ -3,13 +3,15 @@ session_start();
 error_reporting(0);
 include("include/config.php");
 if (isset($_POST['submit'])) {
-    $query = "SELECT * FROM `admin_info` WHERE admin_id='" . $_POST['admin_id'] . "' and password='" . md5($_POST['password']) . "'";
+    echo $_POST['admin_id'];
+    echo $_POST['password'];
+    $query = "SELECT * FROM `admin_info` WHERE admin_id='" . $_POST['admin_id'] . "' and password='" . $_POST['password'] . "'";
     $result = $con->query("$query");
     $num = mysqli_fetch_array($result);
     $host = $_SERVER['HTTP_HOST'];
     $uip = $_SERVER['REMOTE_ADDR'];
-    if ($num == 1) {
-        $extra = "add_book.php";
+    if ($num > 0) {
+        $extra = "dashboard.php";
         $_SESSION['login'] = $_POST['admin_id'];
         $_SESSION['name'] = $num['name'];
 
@@ -81,7 +83,7 @@ if (isset($_POST['submit'])) {
                         </p>
                         <div class="form-group">
                             <span class="input-icon">
-                                <input type="text" class="form-control" name="lib_id" placeholder="Library ID">
+                                <input type="text" class="form-control" name="admin_id" placeholder="Admin ID">
                                 <i class="fa fa-user"></i> </span>
                         </div>
                         <div class="form-group form-actions">
@@ -95,12 +97,6 @@ if (isset($_POST['submit'])) {
                             <button type="submit" class="btn btn-primary pull-right" name="submit">
                                 Login <i class="fa fa-arrow-circle-right"></i>
                             </button>
-                        </div>
-                        <div class="new-account">
-                            Don't have an account yet?
-                            <a href="registration.php">
-                                Create an account
-                            </a>
                         </div>
                     </fieldset>
                 </form>
