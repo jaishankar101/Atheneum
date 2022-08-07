@@ -3,26 +3,26 @@ session_start();
 error_reporting(0);
 include("include/config.php");
 if (isset($_POST['submit'])) {
-    $query = "SELECT * FROM `student_info` WHERE lib_id='" . $_POST['lib_id'] . "' and password='" . md5($_POST['password']) . "'";
+    $query = "SELECT * FROM `admin_info` WHERE admin_id='" . $_POST['admin_id'] . "' and password='" . md5($_POST['password']) . "'";
     $result = $con->query("$query");
     $num = mysqli_fetch_array($result);
     $host = $_SERVER['HTTP_HOST'];
     $uip = $_SERVER['REMOTE_ADDR'];
-    if ($num > 0) {
-        $extra = "dashboard.php";
-        $_SESSION['login'] = $_POST['lib_id'];
+    if ($num == 1) {
+        $extra = "add_book.php";
+        $_SESSION['login'] = $_POST['admin_id'];
         $_SESSION['name'] = $num['name'];
 
         $status = 1;
-        $log = $con->query("INSERT INTO `userlog`(`lib_id`, `name`, `userip`, `status`) values('" . $_SESSION['login'] . "','" . $_SESSION['name'] . "','$uip','$status');");
+        // $log = $con->query("INSERT INTO `userlog`(`lib_id`, `name`, `userip`, `status`) values('" . $_SESSION['login'] . "','" . $_SESSION['name'] . "','$uip','$status');");
         $uri = rtrim(dirname($_SERVER['PHP_SELF']));
 
         header("location:http://$host$uri/$extra");
         exit();
     } else {
         $status = 0;
-        $extra = "user-login.php";
-        mysqli_query($con, "INSERT INTO `userlog`(`lib_id`, `name`, `userip`, `status`) values('" . $_SESSION['login'] . "','" . $_SESSION['name'] . "','$uip','$status');");
+        $extra = "admin-login.php";
+        // mysqli_query($con, "INSERT INTO `userlog`(`lib_id`, `name`, `userip`, `status`) values('" . $_SESSION['login'] . "','" . $_SESSION['name'] . "','$uip','$status');");
         $_SESSION['errmsg'] = "Invalid username or password";
         $uri  = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
         header("location:http://$host$uri/$extra");
@@ -65,7 +65,7 @@ if (isset($_POST['submit'])) {
     <div class="row">
         <div class="main-login col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
             <div class="logo margin-top-30">
-                <h2> Atheneum | Student Login</h2>
+                <h2> Atheneum | Admin Login</h2>
             </div>
 
             <div class="box-login">
@@ -75,7 +75,7 @@ if (isset($_POST['submit'])) {
                             Sign in to your account
                         </legend>
                         <p>
-                            Please enter your Library ID and password to log in.<br />
+                            Please enter your Admin ID and password to log in.<br />
                             <span style="color:red;"><?php echo $_SESSION['errmsg'];
                                                         echo $_SESSION['errmsg'] = ""; ?></span>
                         </p>

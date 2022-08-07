@@ -95,10 +95,10 @@
     `;
 };
 
-// createNav();
+createNav();
 
 let mybutton = document.getElementById("myBtn");
-let myLoginbtn = document.getElementById("myLoginBtn");
+// let myLoginbtn = document.getElementById("myLoginBtn");
 
 // When the user scrolls down 20px from the top of the document, show the button
 window.onscroll = function () {
@@ -114,9 +114,9 @@ function scrollFunction() {
   }
 }
 
-myLoginbtn.onclick = function () {
-  document.getElementById("id01").style.display = "block";
-};
+// myLoginbtn.onclick = function () {
+//   document.getElementById("id01").style.display = "block";
+// };
 
 // When the user clicks on the button, scroll to the top of the document
 function topFunction() {
@@ -126,14 +126,14 @@ function topFunction() {
 
 let subscribe = document.querySelector(".subscribe");
 
-function login() {
-  const username = subscribe.user_name.value;
-  const password = subscribe.password.value;
+// function login() {
+//   const username = subscribe.user_name.value;
+//   const password = subscribe.password.value;
 
-  if (username === "bmsce" && password === "iamgod") {
-    location.href = "index.html";
-    myLoginbtn.classList.add(".hidden");
-  } else {
-    alert("ENTERED INFORMATION IS WRONG!");
-  }
-}
+//   if (username === "bmsce" && password === "iamgod") {
+//     location.href = "index.html";
+//     myLoginbtn.classList.add(".hidden");
+//   } else {
+//     alert("ENTERED INFORMATION IS WRONG!");
+//   }
+// }

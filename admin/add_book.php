@@ -8,7 +8,6 @@ include('include/checklogin.php');
 if (isset($_POST['submit'])) {
     $Bcode = $_POST['Bcode'];
     $Bname = $_POST['Bname'];
-    $img = $_FILES['img'];
     $author = $_POST['author'];
     $ed = $_POST['ed'];
     $details = $_POST['details'];
@@ -16,32 +15,31 @@ if (isset($_POST['submit'])) {
     $e_link = $_POST['e_link'];
     $supplier_id = $_POST['supplier_id'];
     $quantity = $_POST['quantity'];
-
     //IMAGE :START
-    $imgname = $img['name'];
     $img = $_FILES['img'];
+    $imgname = $img['name'];
     $basicext = array("png", "jpg", "jpeg");
     $temp = $img['tmp_name'];
     $namesplit = explode(".", $imgname);
     $imgext = strtolower(end($namesplit));
     if (in_array($imgext, $basicext)) {
-        $directory = "../img/books/" . $dept . "/" . $Bcode . "." . $imgext;
-        move_uploaded_file($temp, $directory);
+        $directory = "img/books/" . $dept . "/" . $Bcode . "." . $imgext;
+        move_uploaded_file($temp, "../" . $directory);
     } else {
-        // $extra = "add_book.php";
+        $extra = "add_book.php";
+        $uri  = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+        header("location:http://$host$uri/$extra");
+        exit();
         $_SESSION['errmsg'] = "Invalid Extention";
-        // $uri  = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-        // header("location:http://$host$uri/$extra");
-        // exit();
     }
     //IMAGE :END
 
-    $sql = $con->query("INSERT INTO `books` (`Bcode`,`Bimg`, `Bname`, `author`, `ed`, `details`,`dept`, `e_link`,`supplier_id`,`quantity`) VALUES
-    ('$Bcode','$directory', '$Bname', '$author', '$ed', '$details','$dept','$e_link','$supplier_id','$quantity');");
-    if ($sql) {
+    $sql = "INSERT INTO `books` (`Bcode`,`Bimg`, `Bname`, `author`, `ed`, `details`,`dept`, `e_link`,`supplier_id`,`quantity`) VALUES
+    ('$Bcode','$directory', '$Bname', '$author', '$ed', '$details','$dept','$e_link','$supplier_id','$quantity');";
+    if ($con->query($sql)) {
         echo "<script>alert('Book info added Successfully');</script>";
         $host = $_SERVER['HTTP_HOST'];
-        $extra = "manage_books.php";
+        $extra = "add_book.php";
         $uri  = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
         header("location:http://$host$uri/$extra");
         exit();
@@ -71,7 +69,8 @@ if (isset($_POST['submit'])) {
 
 <body>
     <div id="app">
-        <?php include('include/sidebar.php'); ?>
+        <?php //include('include/sidebar.php'); 
+        ?>
         <div class="app-content">
 
             <?php include('include/header.php'); ?>
@@ -86,8 +85,8 @@ if (isset($_POST['submit'])) {
                                 <h1 class="mainTitle">Admin | Add Books</h1>
                             </div>
                             <ol class="breadcrumb">
-                                <li>
-                                    <span>Admin</span>
+                                <li><a href="dashboard.php">
+                                        <span>Admin</span></a>
                                 </li>
                                 <li class="active">
                                     <span>Add Books</span>
