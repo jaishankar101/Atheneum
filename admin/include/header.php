@@ -50,7 +50,7 @@
 				</li>
 
 				<li>
-					<a href="javascript:void(0)">
+					<a href="user_logs.php">
 						<div class="item-content">
 							<div class="item-media">
 								<i class="ti-user"></i>

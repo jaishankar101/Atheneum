@@ -9,7 +9,7 @@ if (isset($_POST['submit'])) {
     $host = $_SERVER['HTTP_HOST'];
     $uip = $_SERVER['REMOTE_ADDR'];
     if ($num > 0) {
-        $extra = "dashboard.php";
+        $extra = "books.php";
         $_SESSION['login'] = $_POST['lib_id'];
         $_SESSION['name'] = $num['std_name'];
 

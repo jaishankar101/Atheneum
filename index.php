@@ -12,14 +12,15 @@
     <!-- Bootstrap core CSS -->
     <link href="css/theme.css" rel="stylesheet" type="text/css" />
     <link href="bootstrap/css/bootstrap.css" rel="stylesheet" />
-
+    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/home.css" />
     <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="blocks.css" />
 </head>
 
 <body>
-    <nav class="bg-white navbar navbar-expand-lg navbar-light pb-lg-1 pt-lg-3 text-uppercase"></nav>
+    <!-- <nav class="bg-white navbar navbar-expand-lg navbar-light pb-lg-1 pt-lg-3 text-uppercase"></nav> -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light"></nav>
     <!-- <nav class="navbar"></nav> -->
     <header class="hero-section">
         <div class="content">
@@ -344,6 +345,5 @@
     <script src="assets/js/popper.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
 </body>
-
 
 </html>

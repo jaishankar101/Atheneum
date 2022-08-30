@@ -7,10 +7,33 @@ if (isset($_POST['submit'])) {
     $number = $_POST['number'];
     $email = $_POST['email'];
     $password = md5($_POST['password']);
-    $query = "INSERT INTO `student_info`(`std_name`, `lib_id`, `usn`, `number`, `email`, `password`) VALUES ('$name','$lib_id','$usn','$number','$email','$password')";
+    $host = $_SERVER['HTTP_HOST'];
+    //IMAGE :START
+    $user_img = $_FILES['user_img'];
+    $imgname = $user_img['name'];
+    $basicext = array("png", "jpg", "jpeg");
+    $temp = $user_img['tmp_name'];
+    $namesplit = explode(".", $imgname);
+    $imgext = strtolower(end($namesplit));
+    if (in_array($imgext, $basicext)) {
+        $directory = "img/users/" . $lib_id . "." . $imgext;
+        move_uploaded_file($temp, $directory);
+    } else {
+        $extra = "registration.php";
+        $uri  = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+        header("location:http://$host$uri/$extra");
+        exit();
+    }
+    //IMAGE :END
 
-    if ($con->query($query)) {
+    $sql = "INSERT INTO `student_info`(`usn`,`std_name`,`std_img`,`lib_id`, `number`, `email`, `password`) VALUES ('$usn','$name','$directory','$lib_id','$number','$email','$password')";
+
+    if ($con->query($sql)) {
         echo "<script>alert('Successfully Registered. You can login now');</script>";
+        $extra = "login.php";
+        $uri  = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+        header("location:http://$host$uri/$extra");
+        exit();
     }
 }
 ?>
@@ -32,7 +55,7 @@ if (isset($_POST['submit'])) {
     <style>
         body {
             color: #fff;
-            background: #63738a;
+            background: #b3e6ff;
             font-family: 'Roboto', sans-serif;
         }
 
@@ -160,16 +183,10 @@ if (isset($_POST['submit'])) {
 
 <body>
     <div class="signup-form">
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             <h2>Register</h2>
             <p class="hint-text">Create your account,It'll only takes a minute.</p>
 
-            <div class="form-group">
-                <p style="color:red" class="star">*</p>
-                <span class="input-icon">
-                    <input type="text" class="form-control" name="name" placeholder="Name" autofocus required="required">
-                    <i class="fa fa-user"></i> </span>
-            </div>
             <div class="form-group">
                 <p style="color:red" class="star">*</p>
                 <span class="input-icon">
@@ -179,10 +196,25 @@ if (isset($_POST['submit'])) {
             <div class="form-group">
                 <p style="color:red" class="star">*</p>
                 <span class="input-icon">
+                    <input type="text" class="form-control" name="name" placeholder="Name" autofocus required="required">
+                    <i class="fa fa-user"></i> </span>
+            </div>
+            <div class="form-group">
+                <p style="color:red" class="star">*</p>
+                <span class="input-icon">
                     <input type="text" class="form-control" name="lib_id" placeholder="Library-ID" autocomplete="off" required="required">
                     <i class="fa fa-user"></i> </span>
             </div>
-
+            <div class="form-group">
+                <p style="color:red" class="star">*</p>
+                <span class="hidden" style="color:red;">incalid extension</span>
+                <label for="Img">
+                    Upload Image(JPG,JPEG or PNG)
+                </label>
+                <span class="input-icon">
+                    <input type="file" name="user_img" class="form-control" placeholder="Upload Your Image" required="required">
+                    <i class="fa fa-file"></i> </span>
+            </div></span>
             <div class="form-group">
                 <p style="color:red" class="star">*</p>
                 <span class="input-icon">

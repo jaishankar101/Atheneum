@@ -3,7 +3,7 @@ session_start();
 error_reporting(0);
 include('include/config.php');
 include('include/checklogin.php');
-// check_login();
+check_login();
 
 if (isset($_POST['submit'])) {
     $Bcode = $_POST['Bcode'];
@@ -178,7 +178,7 @@ if (isset($_POST['submit'])) {
                                                         <label for="Supplier">
                                                             Supplier Name
                                                         </label>
-                                                        <select name="supplier_id" class="form-control" required="required">
+                                                        <select name="supplier_id" class="form-control">
                                                             <option value="">Select Supplier</option>
                                                             <?php
                                                             $ret = mysqli_query($con, "SELECT * from `supplier`;");

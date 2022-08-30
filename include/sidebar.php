@@ -3,48 +3,25 @@
 
 		<nav>
 
-			<!-- start: MAIN NAVIGATION MENU -->
+			<!-- start: department MENU -->
 			<div class="navbar-title">
-				<span>Main Navigation</span>
+				<span>Department</span>
 			</div>
-			<ul class="main-navigation-menu">
-				<li>
-					<a href="dashboard.php">
-						<div class="item-content">
-							<div class="item-media">
-								<i class="ti-home"></i>
+			<ul class="books-navigation-menu">
+				<?php
+				$ret = mysqli_query($con, "SELECT * from `department`;");
+				while ($row = mysqli_fetch_array($ret)) {
+				?>
+					<li>
+						<a href="#<?php echo htmlentities($row['dept_id']); ?>">
+							<div class="item-content">
+								<div class="item-inner">
+									<span class="title"><?php echo htmlentities($row['dept_name']); ?></span>
+								</div>
 							</div>
-							<div class="item-inner">
-								<span class="title"> Dashboard </span>
-							</div>
-						</div>
-					</a>
-				</li>
-				<li>
-					<a href="saved_books.php">
-						<div class="item-content">
-							<div class="item-media">
-								<i class="ti-pencil-alt"></i>
-							</div>
-							<div class="item-inner">
-								<span class="title"> Saved books </span>
-							</div>
-						</div>
-					</a>
-				</li>
-
-				<li>
-					<a href="borrow_history.php">
-						<div class="item-content">
-							<div class="item-media">
-								<i class="ti-list"></i>
-							</div>
-							<div class="item-inner">
-								<span class="title"> Borrow History </span>
-							</div>
-						</div>
-					</a>
-				</li>
+						</a>
+					</li>
+				<?php } ?>
 
 
 			</ul>

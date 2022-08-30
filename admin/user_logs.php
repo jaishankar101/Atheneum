@@ -28,7 +28,8 @@ include('include/checklogin.php');
 
 <body class="">
     <div id="app">
-        <?php include('include/sidebar.php'); ?>
+        <?php //include('include/sidebar.php'); 
+        ?>
         <div class="app-content">
 
 
@@ -62,6 +63,7 @@ include('include/checklogin.php');
 
                                 <p style="color:red;"><?php echo htmlentities($_SESSION['msg']); ?>
                                     <?php echo htmlentities($_SESSION['msg'] = ""); ?></p>
+
                                 <table class="table table-hover" id="sample-table-1">
                                     <thead>
                                         <tr>

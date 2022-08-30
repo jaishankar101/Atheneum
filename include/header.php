@@ -83,11 +83,16 @@
 				<li style="padding-top:6% ">
 					<h2>Atheneum</h2>
 				</li>
-
+				<?php
+				$sql = $con->query("SELECT * FROM `student_info` where lib_id='" . $_SESSION['login'] . "'");
+				$result = mysqli_fetch_array($sql);
+				?>
 				<li class="dropdown current-user">
 					<a onclick="myFunction()" class="dropfun" data-toggle="dropdown">
-						<img src="assets/images/avatar-1.jpg" alt="Jai"> <span class="username"><?php echo $_SESSION['name'];
-																								?>
+						<img src="<?php echo $result['std_img'];
+									?>" alt="sorry"> <span class="username"><?php echo $result['std_name'];
+																			//assets/images/avatar-1.jpg																									 
+																			?>
 							<i class="ti-angle-down"></i></span>
 					</a>
 					<ul class="dropdown-menu dropdown-dark" id="myDropdown">
