@@ -3,7 +3,7 @@ session_start();
 error_reporting(0);
 include("include/config.php");
 if (isset($_POST['submit'])) {
-    $query = "SELECT * FROM `student_info` WHERE lib_id='" . $_POST['lib_id'] . "' and password='" . md5($_POST['password']) . "'";
+    $query = "SELECT * FROM `student_info` WHERE lib_id='" . $_POST['lib_id'] . "' and password='" . $_POST['password'] . "'";
     $result = $con->query("$query");
     $num = mysqli_fetch_array($result);
     $host = $_SERVER['HTTP_HOST'];

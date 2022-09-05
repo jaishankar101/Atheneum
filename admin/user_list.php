@@ -1,21 +1,16 @@
 <?php
 session_start();
-//error_reporting(0);
+error_reporting(0);
 include('include/config.php');
 include('include/checklogin.php');
-check_login();
-
-
-if (isset($_GET['del'])) {
-    $con->query("DELETE from `books` where Bcode = '" . $_GET['Bcode'] . "'");
-    $_SESSION['msg'] = "data deleted !!";
-}
+// check_login();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>Admin | Manage Books</title>
+    <title>Admin | User List</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -26,19 +21,19 @@ if (isset($_GET['del'])) {
     <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="vendor/fontawesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="vendor/themify-icons/themify-icons.min.css">
-    <link rel="stylesheet" href="assets/css/styles.css?1422585377">
+    <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/plugins.css">
     <link rel="stylesheet" href="assets/css/themes/theme-1.css" id="skin_color" />
 </head>
 
-<body>
+<body class="">
     <div id="app">
         <?php //include('include/sidebar.php'); 
         ?>
         <div class="app-content">
 
-            <?php include('include/header.php'); ?>
 
+            <?php include('include/header.php'); ?>
             <!-- end: TOP NAVBAR -->
             <div class="main-content">
                 <div class="wrap-content container" id="container">
@@ -46,14 +41,14 @@ if (isset($_GET['del'])) {
                     <section id="page-title">
                         <div class="row">
                             <div class="col-sm-8">
-                                <h1 class="mainTitle">Admin | Manage Books</h1>
+                                <h1 class="mainTitle">User List</h1>
                             </div>
                             <ol class="breadcrumb">
-                                <li><a href="dashboard.php">
-                                        <span>Admin</span></a>
+                                <li>
+                                    <span>Admin </span>
                                 </li>
                                 <li class="active">
-                                    <span>Manage Books</span>
+                                    <span>User List</span>
                                 </li>
                             </ol>
                         </div>
@@ -64,52 +59,40 @@ if (isset($_GET['del'])) {
 
 
                         <div class="row">
-                            <div class="col-md-12 table-responsive">
+                            <div class="col-md-12">
+
                                 <p style="color:red;"><?php echo htmlentities($_SESSION['msg']); ?>
                                     <?php echo htmlentities($_SESSION['msg'] = ""); ?></p>
-                                <table class="table table-hover table-striped" id="sample-table-1">
+
+                                <table class="table table-hover" id="sample-table-1">
                                     <thead>
                                         <tr>
                                             <th class="center">#</th>
-                                            <th class="center hidden-xs">Book Code</th>
-                                            <th class="center">Image</th>
-                                            <th class="center">Book Name</th>
-                                            <th class="center" style="width:120px">Author</th>
-                                            <th class="center">Edition</th>
-                                            <th class="center">Department</th>
-                                            <th class="center">Supplier</th>
-                                            <th class="center">E-Link</th>
-                                            <th class="center">Quantity</th>
-                                            <th class="center">Action</th>
+                                            <th class="hidden-xs">Library ID</th>
+                                            <th>Img</th>
+                                            <th>Name</th>
+                                            <th>Phone No.</th>
+                                            <th>E-Mail </th>
+
 
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $sql = $con->query("SELECT * from `books`");
+                                        $sql = $con->query("select * from `atheneum`.`student_info`;");
                                         $count = 1;
                                         while ($row = mysqli_fetch_array($sql)) {
                                         ?>
 
                                             <tr>
                                                 <td class="center"><?php echo $count; ?>.</td>
-                                                <td class="center hidden-xs"><?php echo $row['Bcode']; ?></td>
-                                                <td class="center"><img src="<?php echo "../" . $row['Bimg']; ?>" style="height: 100px;width: fit-content"></td>
-                                                <td class="center"><?php echo $row['Bname']; ?></td>
-                                                <td class="center"><?php echo $row['author']; ?></td>
-                                                <td class="center"><?php echo $row['ed']; ?></td>
-                                                <td class="center"><?php echo $row['dept']; ?></td>
-                                                <td class="center"><?php echo $row['supplier_id']; ?></td>
-                                                <td class="center"><a href="<?php echo $row['e_link'];  ?>" class="link">Click Here</a></td>
-                                                <td class="center"><?php echo $row['quantity']; ?></td>
-
-                                                <td>
-                                                    <!-- <div class="visible-md visible-lg"> -->
-                                                    <a href="edit_book.php?Bcode=<?php echo $row['Bcode']; ?>" class="btn btn-transparent btn-xs" tooltip-placement="top" tooltip="Edit"><i class="fa fa-pencil"></i></a>
-
-                                                    <a href="manage_books.php?Bcode=<?php echo $row['Bcode'] ?>&del=delete" onClick="return confirm('Are you sure you want to delete?')" class="btn btn-transparent btn-xs tooltips" tooltip-placement="top" tooltip="Remove"><i class="fa fa-times fa fa-white"></i></a>
-                                                    <!-- </div> -->
+                                                <td class="hidden-xs"><?php echo $row['lib_id']; ?></td>
+                                                <td class="center"><img src="<?php echo "../" . $row['std_img']; ?>" style="height: 100px;width: fit-content"></td>
+                                                <td class="hidden-xs"><?php echo $row['std_name']; ?></td>
+                                                <td><?php echo $row['number']; ?></td>
+                                                <td><?php echo $row['email']; ?>
                                                 </td>
+
                                             </tr>
 
                                         <?php
@@ -122,13 +105,10 @@ if (isset($_GET['del'])) {
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
-
         </div>
-    </div>
-    </div>
-    <?php include('include/footer.php'); ?>
     </div>
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.min.js"></script>

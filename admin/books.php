@@ -27,7 +27,11 @@ check_login();
   <link rel="stylesheet" href="assets/css/plugins.css">
   <link rel="stylesheet" href="css/books.css">
   <link rel="stylesheet" href="assets/css/themes/theme-1.css" id="skin_color" />
-
+  <style>
+    .hidden {
+      display: none !important;
+    }
+  </style>
 </head>
 
 <body>
@@ -46,15 +50,16 @@ check_login();
               while ($row = mysqli_fetch_array($ret)) {
               ?>
 
-                <h3><?php echo htmlentities($row['dept_name']); ?></h3>
+                <h3 id="#<?php echo htmlentities($row1['dept']); ?>"><?php echo htmlentities($row['dept_name']); ?></h3>
                 <?php
                 $bet = mysqli_query($con, "SELECT * from `books` where dept='" . $row['dept_id'] . "';");
                 while ($row1 = mysqli_fetch_array($bet)) {
 
                 ?>
-                  <a href="book-details.php">
-                    <input type="text" class="hidden" onclick="fun()">
-                    <div id="#<?php echo htmlentities($row1['dept']); ?>" class="card">
+                  <a class="card" href="book-details.php?Bcode=<?php echo htmlentities($row1['Bcode']); ?>">
+                    <input class="hidden" name="book_code" value="<?php echo htmlentities($row1['Bcode']); ?>">
+
+                    <button type="submit">
                       <img class="card-img-top" src="<?php echo htmlentities($row1['Bimg']); ?>" alt="Card image cap">
                       <div class="card-body">
                         <h5 class="card-title"><?php echo htmlentities($row1['Bname']); ?></h5>
@@ -69,17 +74,16 @@ check_login();
                           <p class="card-text" style="color:red ;">Out Of Stock</p>
                         <?php } ?>
                         <p class="card-text" style="color:black ;"><?php echo htmlentities($row1['details']); ?></p>
-                  </a>
-                  <button onclick="addbag()" class="btn btn-primary btn-book"><?php echo $button ?></button>
+                    </button>
+                    </form>
             </div>
-          </div>
+          <?php } ?>
+          <br>
         <?php } ?>
-        <br>
-      <?php } ?>
+          </div>
         </div>
       </div>
     </div>
-  </div>
   </div>
   <?php include('include/footer.php');
 
@@ -96,14 +100,27 @@ check_login();
       FormElements.init();
     });
 
-    function addbag() {
-      let bagbutton = document.querySelector(".btn-book");
-      bagbutton.innerText = "✅Added";
-      bagbutton.style = "background-color:white !important; color:green";
-      <?php
-      $con->query("INSERT INTO `book_issue`(`lib_id`,`Bcode`) VALUES ('" . $_SESSION['login'] . "',); ");
-      ?>
-    }
+    // function addbook(val) {
+    //   $.ajax({
+    //     type: "POST",
+    //     url: "update.php",
+    //     data: 'Bcode=' + val,
+    //     success: function(data) {
+    //       let bagbutton = document.querySelector(".btn-book");
+    //       bagbutton.innerText = "✅Added";
+    //       bagbutton.style = "background-color:white !important; color:green";
+    //     }
+    //   });
+    // }
+    // function addbag(book_code) {
+    //   let bagbutton = document.querySelector(".btn-book");
+    //   bagbutton.innerText = "✅Added";
+    //   bagbutton.style = "background-color:white !important; color:green";
+    //   var b = {
+    //     book_code: book_code
+    //   }
+    //   $.post("update.php", b);
+    // }
   </script>
 </body>
 

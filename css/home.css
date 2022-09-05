@@ -207,10 +207,11 @@
 }
 
 .collection-container {
-  width: 100%;
+  /* width: 100%; */
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 10px;
+  margin-top: 60px;
+  /* grid-template-columns: repeat(3, 1fr); */
+  /* grid-gap: 10px; */
   /* margin: 10px 10px 10px 10px; */
 }
 
@@ -263,4 +264,96 @@
 
 .font-weight-bold p {
   font-weight: bold !important;
+}
+
+.content-grids {
+  /* background: #3391e7; */
+  padding: 20px 0px;
+}
+
+@media screen and (max-width: 1366px) {
+  .wraper {
+    width: 90%;
+  }
+}
+
+.wraper {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.group {
+  zoom: 1;
+}
+.section {
+  clear: both;
+  padding: 0px;
+  margin: 0px;
+}
+.section h2 {
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 0.25rem !important;
+}
+
+.section hr {
+  box-sizing: content-box;
+  height: 0;
+  margin-top: 1rem;
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+.fullbox:first-child {
+  margin-left: 0;
+}
+.fullbox {
+  display: block;
+  float: left;
+  margin: 0% 0 0% 1.6%;
+  background: #f1f6f9;
+  width: 29.2%;
+  height: 50%;
+  padding: 1.5%;
+  border-radius: 1.1em;
+}
+
+.fullbox .imgbox {
+  width: 32.2%;
+  display: block;
+  float: left;
+}
+
+.fullbox .imgbox img {
+  max-width: 100%;
+  display: block;
+}
+
+.fullbox .textbox {
+  display: block;
+  float: left;
+  margin: 0% 0 0% 3.6%;
+  width: 64.2%;
+  margin-top: 5px;
+}
+.fullbox .textbox h3 {
+  color: #3391e7;
+  margin-bottom: 0.2em;
+  margin-top: 0;
+  font-size: 2em;
+  font-family: "Ropa Sans", sans-serif;
+  font-weight: normal;
+  letter-spacing: -1px;
+}
+
+.fullbox .textbox p {
+  font-size: 0.8125em;
+  color: #3391e7;
+  line-height: 1.5em;
+  font-family: Arial, "Helvetica Neue", "Helvetica", Tahoma, Verdana, sans-serif;
+  padding: 0;
+}
+
+.fullbox .textbox button {
+  line-height: 1.9em;
+  margin-top: 0.2em;
 }

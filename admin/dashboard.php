@@ -79,7 +79,7 @@ check_login();
                                         <h2 class="StepTitle">Books</h2>
 
                                         <p class="cl-effect-1">
-                                            <a href="books.php">
+                                            <a href="manage_books.php">
                                                 View Books
                                             </a>
                                         </p>

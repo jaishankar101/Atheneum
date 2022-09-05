@@ -12,8 +12,8 @@ if (isset($_POST['submit'])) {
     $uip = $_SERVER['REMOTE_ADDR'];
     if ($num > 0) {
         $extra = "dashboard.php";
-        $_SESSION['login'] = $_POST['admin_id'];
-        $_SESSION['name'] = $num['name'];
+        $_SESSION['admin'] = $_POST['admin_id'];
+        $_SESSION['admin-name'] = $num['admin_name'];
 
         $status = 1;
         // $log = $con->query("INSERT INTO `userlog`(`lib_id`, `name`, `userip`, `status`) values('" . $_SESSION['login'] . "','" . $_SESSION['name'] . "','$uip','$status');");

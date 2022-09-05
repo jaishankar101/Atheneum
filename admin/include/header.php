@@ -19,7 +19,7 @@
 					</a>
 				</li>
 				<li>
-					<a href="javascript:void(0)">
+					<!-- <a href="javascript:void(0)">
 						<div class="item-content">
 							<div class="item-media">
 								<i class="ti-user"></i>
@@ -46,7 +46,7 @@
 							</a>
 						</li>
 
-					</ul>
+					</ul> -->
 				</li>
 
 				<li>
@@ -131,7 +131,7 @@
 
 				<li class="dropdown current-user">
 					<a onclick="myFunction()" class="dropfun" data-toggle="dropdown">
-						<img src="assets/images/avatar-1.jpg" alt="Peter"> <span class="username"><?php echo $_SESSION['name'] ?>
+						<img src="assets/images/avatar-1.jpg" alt="Peter"> <span class="username"><?php echo $_SESSION['admin-name'] ?>
 							<i class="ti-angle-down"></i></i></span>
 					</a>
 					<ul class="dropdown-menu dropdown-dark" id="myDropdown">
